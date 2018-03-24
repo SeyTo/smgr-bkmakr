@@ -1,0 +1,16 @@
+[configs]
+vim.rc=$HOME/.vimrc
+vim.root=$HOME/.vim
+tmux.rc=$HOME/.tmux.conf
+ideavim.rc=$HOME/.ideavimrc
+vrapper.rc=$HOME/.vrapperrc
+w3m=$HOME/.w3m
+xbindkeysrc=$HOME/.xbindkeysrc
+zsh.rc=$HOME/.zshrc
+oh-my-zsh=$HOME/.oh-my-zsh
+
+[encrypt]
+gnupg=$HOME/.gnupg
+ssh=$HOME/.ssh
+taskdb=$HOME/.task
+task.rc=$HOME/.taskrc
