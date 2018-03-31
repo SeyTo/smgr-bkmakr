@@ -1,6 +1,12 @@
 import argparse
 import configparser
 import os
+import subprocess
+
+def archive():
+    """Compresses a file/directory in a lossless/lossfull manner.
+        
+    """ 
 
 
 class BackupRoot(argparse.Action):
@@ -26,8 +32,28 @@ class BackupRoot(argparse.Action):
             print ('aborting')
 
 
+class Archive(argparse.Action):
+    
+    def __call__(self, parser, namespace, values, option_string=None):
+        val = values[0]
+        
+        if not os.path.isdir(val[0]) or not os.path.isfile(val):
+            print ('{} is not a valid path.'.format(val))
+            return
+         
+        subprocess.call(['tar', '-vcf', 'backup.tar', val])
 
+
+class Upload(argparse.Action):
+    
+    def __call__(self, parser, namespace, values, option_string=None):
+        print (values)
+
+# for all archiving purposes
 ARCHIVER_FILE = 'archive.sh'
 parser = argparse.ArgumentParser(prog='Backup Maker', description='Backs up all your projects')
 parser.add_argument('--root', nargs=1, action=BackupRoot, help='set root directory that contains all your projects to backup', )
+parser.add_argument('-a','--archive', nargs=1, action=Archive, help='Creates an archive file of the given directory', )
+parser.add_argument('-u','--upload', nargs=1, action=Upload, help='Uploads the backed up files to cloud directory given in config file.', )
+
 parser.parse_args()
